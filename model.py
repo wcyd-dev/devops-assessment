@@ -18,9 +18,6 @@ TARGET = "Reached_on_time"
 imputer = SimpleImputer(strategy='most_frequent')
 data_imputed = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
 
-# Check for missing values
-#print(data.isnull().sum())
-
 # Encode all object (categorical) columns
 for column in data_imputed.columns:
     if data_imputed[column].dtype == 'object':
@@ -36,13 +33,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # # Step 5: Train the logistic regression model
 model = LogisticRegression(max_iter=1000)
 model.fit(X_train, y_train)
-
-# Step 6: Make predictions
-#y_pred = model.predict(X_test)
-
-# Step 7: Evaluate the model
-# accuracy = accuracy_score(y_test, y_pred)
-# print(f"Accuracy: {accuracy:.2f}")
 
 # Save the trained model
 joblib.dump(model, "delivery_predictor.pkl")
